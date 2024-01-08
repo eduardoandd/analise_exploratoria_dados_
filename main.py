@@ -23,7 +23,6 @@ fig_none.update_traces(textposition=aux_none['textpositon'], textinfo='percent+l
 
 aux_none.drop('textpositon',inplace=True)
 
-
 # % DE DADOS NÃO VAZIOS
 df_value_percent=df.replace(0,pd.NA)
 value_percent=df_value_percent.notna().sum() / len(df)*100
@@ -39,4 +38,11 @@ df_filtered[['price', 'listPrice', 'stars']] = df_filtered[['price', 'listPrice'
 df_filtered['reviews'] = df_filtered['reviews'].astype(int)
 df_filtered.info()
 
+df_filtered['reviews'].describe().round(2)
+df_filtered.loc[df_filtered['reviews'].idxmax()]
 
+df_filtered['reviews'].value_counts() / df_filtered['reviews'].sum()*100
+
+df_filtered[['categoryName','stars']].value_counts().sort_index().sort_values(ascending=False)
+
+df['price']
