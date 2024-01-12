@@ -1,7 +1,7 @@
 import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 
 #TRATAMENTO
 df = pd.read_csv('amz_br_total_products_data_processed.csv')
@@ -45,4 +45,21 @@ df_filtered['reviews'].value_counts() / df_filtered['reviews'].sum()*100
 
 df_filtered[['categoryName','stars']].value_counts().sort_index().sort_values(ascending=False)
 
-df['price']
+#======== INTERPRETAÇÃO DE GRÁFICOS ========
+sns.set()
+sns.set_context('poster')
+
+df[df['isBestSeller']==True].describe().round(2)
+fig,ax=plt.subplots(figsize=(15,8))
+fig.suptitle('Estrelas por grupo de vendedor')
+sns.boxplot(y='stars',x='isBestSeller',data=df,palette='rainbow',whis=8.0)
+
+# HISTOGRAMA
+fig,ax=plt.subplots()
+sns.histplot(data=df,ax=ax,x='stars',binwidth=1.0)
+
+
+
+
+
+
